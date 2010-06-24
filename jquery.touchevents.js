@@ -10,35 +10,35 @@
 
 (function($){
 
-	$(function(){
-		var events = "touchstart touchmove touchend touchcancel";
-		$(document).bind(events, function(){
-		  var type, simulated, touch = event.changedTouches[0];
+  $(function(){
+    var events = "touchstart touchmove touchend touchcancel";
+    $(document).bind(events, function(){
+      var type, simulated, touch = event.changedTouches[0];
 
-		  switch (event.type) {
-		    case "touchstart": type = "mousedown"; break;
-		    case "touchmove": type = "mousemove"; break;    
-		    case "touchend": type = "mouseup"; break;
-		    default: return;
-		  }
+      switch (event.type) {
+        case "touchstart": type = "mousedown"; break;
+        case "touchmove": type = "mousemove"; break;    
+        case "touchend": type = "mouseup"; break;
+        default: return;
+      }
 
-		  simulated = document.createEvent("MouseEvent");
-		  simulated.initMouseEvent(
-				type, true, true, window, 1,
-	      touch.screenX, touch.screenY,
-	      touch.clientX, touch.clientY, 
-				false, false, false, false, 
-				0, null
-			);
+      simulated = document.createEvent("MouseEvent");
+      simulated.initMouseEvent(
+        type, true, true, window, 1,
+        touch.screenX, touch.screenY,
+        touch.clientX, touch.clientY, 
+        false, false, false, false, 
+        0, null
+      );
 
-		  touch.target.dispatchEvent(simulated);
-		
-			if (event.type == "touchmove" ){
-			  event.preventDefault();				
-			}
-			
-		}, true);
-	});
+      touch.target.dispatchEvent(simulated);
+    
+      if (event.type == "touchmove" ){
+        event.preventDefault();        
+      }
+      
+    }, true);
+  });
 
 })(jQuery);
 
